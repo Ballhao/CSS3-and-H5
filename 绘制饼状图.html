@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="circle">
+    </canvas>
+</body>
+
+</html>
+<script>
+    (function () {
+        var data = [{
+                "value": .5,
+                "color": "blue",
+                "title": "Curry"
+            },
+            {
+                "value": .3,
+                "color": "pink",
+                "title": "Klay"
+            },
+            {
+                "value": .1,
+                "color": "yellow",
+                "title": "James"
+            },
+            {
+                "value": .1,
+                "color": "red",
+                "title": "young"
+            }
+        ];
+        /** @type {HTMLCanvasElement} */ //即可拥有canvas全部代码提示
+        var circle = document.querySelector('#circle');
+        var cir = circle.getContext('2d');
+        circle.width = 900;
+        circle.height = 900;
+        circle.style.border = "1px solid black";
+        //起始角度
+        var s_angle = -90;
+        //半径
+        var r = 150
+        //
+        for (var i = 0; i < data.length; i++) {
+            cir.beginPath();
+            //获取结束角度
+            var cirangle = data[i].value * 360;
+            cir.moveTo(400, 400);
+            cir.fillStyle = data[i].color;
+            var s_arc = s_angle * Math.PI / 180;
+            var e_arc = (cirangle + s_angle) * Math.PI / 180;
+            cir.arc(400, 400, r, s_arc, e_arc);
+            cir.fill();
+
+            //获取文字
+            var txt = data[i].title;
+            var x, y;
+            //获取当前角度
+            var txtangle = s_angle + 1 / 2 * cirangle;
+            console.log(txtangle);
+            //计算文字的x y值
+            x = 400 + Math.cos(txtangle * Math.PI / 180) * (r + 20);
+            console.log(x);
+            y = 400 + Math.sin(txtangle * Math.PI / 180) * (r + 20);
+            console.log(y);
+            //设置文字定位
+            if (txtangle > 90 && txtangle < 270) {
+                cir.textAlign = 'end';
+            }
+            cir.fillText(txt, x, y);
+            cir.fill();
+            //下一次绘制的起始角度
+            s_angle += cirangle;
+        }
+    })()
+</script>

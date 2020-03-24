@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin-left: 1px;
+            float: left;
+            width: 200px;
+            height: 300px;
+            border: brown solid 2px;
+        }
+
+        p {
+
+            line-height: 20px;
+            font-size: 15px;
+            color: cornflowerblue;
+            font-weight: 1;
+            background-color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div1">
+        <p id="pe" draggable="true">tmd拖拽老子</p>
+    </div>
+    <div class="div2" id="div2"></div>
+</body>
+
+</html>
+<script>
+    // var p = document.getElementById('pe');
+    document.ondragstart = function (e) {
+        console.log(e)
+        e.target.style.opacity = 0.5;
+        e.dataTransfer.setData("text/html", e.target.id);
+    }
+    document.ondragend = function (e) {
+        e.target.style.opacity = 1;
+    }
+    document.ondragover = function (e) {
+        e.preventDefault();
+    }
+    document.ondrop = function (e) {
+        var id = e.dataTransfer.getData("text/html");
+        e.target.appendChild(document.getElementById(id));
+    }
+</script>

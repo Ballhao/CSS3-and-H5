@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            height: 100%;
+
+        }
+
+
+        .mountain {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 3840px;
+            height: 336px;
+            overflow: hidden;
+        }
+
+        .bear {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 200px;
+            height: 100px;
+            background: url('../Images/bear.png') no-repeat;
+            animation: bear .7s steps(8) infinite, bearmove 3s forwards;
+            z-index: 20;
+        }
+
+        .mountain>ul {
+            width: 200%;
+            list-style: none;
+            animation: m1move 15s linear infinite;
+        }
+
+        .mountain>ul>li {
+            float: left;
+        }
+
+        .mountain>ul>li>img {
+
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        @keyframes bear {
+            0% {}
+
+            100% {
+
+                background-position: -1600px 0;
+            }
+        }
+
+        @keyframes bearmove {
+            0% {}
+
+            100% {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes m1move {
+            0% {
+                transform: translateX(0px);
+            }
+
+            100% {
+                transform: translateX(-3840px);
+                /* background-position: bottom right; */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bear">
+    </div>
+    <div class="mountain">
+        <ul>
+            <li>
+                <img src="../Images/bg-mountain-1.png" alt="">
+            </li>
+            <li>
+                <img src="../Images/bg-mountain-1.png" alt="">
+            </li>
+        </ul>
+
+
+    </div>
+</body>
+
+</html>
