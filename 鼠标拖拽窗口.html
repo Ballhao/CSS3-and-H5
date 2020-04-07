@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .cont {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .words {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            width: 400px;
+            height: 600px;
+            transform: translateX(-50%);
+            border: 1px solid black;
+            /* margin: 400px auto; */
+        }
+
+        .shade {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: lightblue;
+            z-index: 9;
+            opacity: .5;
+        }
+
+        .login_box {
+            position: absolute;
+            display: none;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 400px;
+            transform: translate(-50%, -50%);
+            background-color: blueviolet;
+
+            z-index: 99;
+        }
+
+        .login_head {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            background-color: brown;
+            cursor: move;
+        }
+
+        .box_x {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            right: 10px;
+            top: 5px;
+            cursor: pointer;
+
+        }
+
+        .box_x::after {
+            content: 'X';
+        }
+    </style>
+</head>
+<script>
+    window.onload = function () {
+        const a_login = document.querySelector('#a_login');
+        const lhead = document.querySelector('.login_head');
+        const shade = document.querySelector('.shade');
+        const login_box = document.querySelector('.login_box');
+        const lx = document.querySelector('.box_x');
+        //点击显示登录
+        a_login.addEventListener('click', function () {
+            shade.style.display = 'block';
+            login_box.style.display = 'block';
+        })
+        //点击取消登录
+        lx.addEventListener('click', () => {
+            shade.style.display = 'none';
+            login_box.style.display = 'none';
+        })
+        lhead.addEventListener('mousedown', (e) => {
+            let x = e.pageX - login_box.offsetLeft;
+            let y = e.pageY - login_box.offsetTop;
+            document.addEventListener('mousemove', move);
+
+            function move(e) {
+                login_box.style.left = e.pageX - x + 'px';
+                login_box.style.top = e.pageY - y + 'px';
+            };
+            document.addEventListener('mouseup', () => {
+                document.removeEventListener('mousemove', move)
+            });
+        })
+
+    }
+</script>
+
+<body>
+    <div class="cont">
+        <div class="words">
+            <a href="javaScript:;" id="a_login">点击登录</a>
+            <p>大领导i啊和舞蹈hi未到位i奥i我回答我我和大量的挖了我的埃瓦里等哈大卫哈维的</p>
+        </div>
+    </div>
+    <!-- 遮罩层 -->
+    <div class="shade"></div>
+    <!-- 登录框 -->
+    <div class="login_box">
+        <div class="login_head">
+            <div class="box_x"></div>
+        </div>
+    </div>
+</body>
+
+</html>
